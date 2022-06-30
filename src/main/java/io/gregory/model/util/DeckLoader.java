@@ -1,9 +1,9 @@
 package io.gregory.model.util;
 
-import io.gregory.model.deck.Deck;
 import io.gregory.model.card.Card;
 import io.gregory.model.card.CardRank;
 import io.gregory.model.card.CardSuit;
+import io.gregory.model.deck.Deck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,8 +32,7 @@ public class DeckLoader {
     try (Stream<String> cardLine = Files.lines(Path.of(path))) {
       return cardLine.findFirst()
         .map(toDeck)
-        .filter(Deck::isValid)
-        .map(toShuffledDeck);
+        .filter(Deck::isValid);
     }
     catch (Exception e) {
       logger.warn("Failed loading or parsing the custom deck");
@@ -53,8 +51,4 @@ public class DeckLoader {
       .map(toCard)
       .collect(Collectors.collectingAndThen(Collectors.toList(), Deck::new));
 
-  private static final UnaryOperator<Deck> toShuffledDeck = deck -> {
-    deck.shuffle();
-    return deck;
-  };
 }

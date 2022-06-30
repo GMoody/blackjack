@@ -1,4 +1,5 @@
-# Blackjack
+# Lendo Blackjack
+https://emp.jobylon.com/jobs/110873-lendo-backend-engineer/
 
 ## Game model
  - Create a single deck of playing cards
